@@ -1,7 +1,6 @@
 @extends ('layouts.main')
 
 @section('content')
-
 <form method="post" action="process_route.php" class="route-container">
       <label for="route">Select a route:</label>
       <select name="route" id="route">
