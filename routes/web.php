@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\RoutesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +25,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\PagesController::class, 'home'])->name('home');
+Route::get('/logout', [LogoutController::class,'logout'])->name('logout');
 // Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/accounts', [App\Http\Controllers\PagesController::class,'accounts'])->name('accounts');
+// Route::post('');
+Route::get('/history', [App\Http\Controllers\PagesController::class,'history'])->name('history');
+Route::get('', [PagesController::class, 'landing']) -> name('landing');
+Route::get('/routes', [PagesController::class, 'route'])-> name('routes');
+
+// Route::get('/logout', [\App\Http\Controllers\LogoutController::class,
+// // function(){
+// //     return redirect('/landing');
+// // },
+// 'logout']) -> name('logout.perform');
+
+//Resource Posts
+Route::post('/accounts', [AccountsController::class, 'store']);
+Route::post('/routes', [RoutesController::class,'store'] );

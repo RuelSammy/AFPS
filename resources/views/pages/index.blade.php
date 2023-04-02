@@ -1,15 +1,83 @@
-@extends ('layouts.main')
 
-@section('content')
-<form method="post" action="process_route.php" class="route-container">
-      <label for="route">Select a route:</label>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>ATW | Home </title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul class="nav navbar justify-content-end">
+                  <li class="nav-item">
+                  <a class="nav-link" href="{{Route('history')}}"> History </a>
+                  </li>
+                  @auth
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{Route('logout')}}">Log Out</a>
+                  </li>
+                  @endauth
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Balance</a>
+                   <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Mpesa</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">E-Wallet</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Credit Card</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Other</a> 
+
+                  </div>
+                </li>
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="#">Login</a>
+                </li> -->
+              </ul>
+
+        </nav>
+    </header>
+    
+
+<form method="POST" action="/accounts"  class="route-container">
+  @csrf
+<!-- action="process_route.php" -->
+      <label for="route" style="margin-left: 20px;">Select a route:</label>
+
       <select name="route" id="route">
         <optgroup label="Embassava">
-          <option value="town-jogoo">Town - Jogoo rd (30 sh)</option>
-          <option value="jogoo-buruburu">Jogoo rd - Buruburu (20 sh)</option>
-          <option value="town-buruburu">Town - Buruburu (50 sh)</option>
+          <option  value="town-jogoo">Town - Jogoo rd (30 sh)</option>
+          <option  value="jogoo-buruburu">Jogoo rd - Buruburu (20 sh)</option>
+          <option  value="town-buruburu">Town - Buruburu (50 sh)</option>
         </optgroup>
-        <optgroup label="Umoinner">
+       <!-- <form method="POST" action="/accounts">
+       @csrf
+       <label for="balance">Balance:</label>
+          <input type="text" name="balance">
+          <button type="submit">Submit</button>
+    </form> -->
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <optgroup label="Umoinner">
           <option value="town-kawangware">Town - Kawangware (40 sh)</option>
           <option value="westlands-kawangware">Westlands - Kawangware (30 sh)</option>
           <option value="town-kabiria">Town - Kabiria (50 sh)</option>
@@ -23,9 +91,80 @@
           <option value="town-rongai">Town - Rongai (50 sh)</option>
           <option value="town-madaraka">Town - Madaraka (30 sh)</option>
           <option value="town-syokimau">Town - Syokimau (70 sh)</option>
-        </optgroup>
-      </select>
-      <input type="submit" name="submit" value="Select Route">
+        </optgroup> -->
+      <!-- </select> -->
+      <input onclick="confirmDeduction(1000, 20)" type="submit" name="submit" value="Select Route">
     </form>
+
+    <script> 
+    // function showConfirmation() {
+    //   let result = confirm("Are you sure you want to proceed?");
+    //         if (result) {
+    //           function deductFare(amount) {
+    //       // Check if the user has enough balance
+    //         if (balance >= amount) {
+    //            balance -= amount;
+    //            alert(`$${amount} deducted from your account. Your new balance is $${balance}.`);
+    //           } else {
+    //           alert("You don't have enough balance to make this transaction.");
+    //            }
+    //            }
+    //          alert("Transaction successfull!");
+    //          } else {
+    //         alert(" Transaction cancelled.");
+    //            }
+    //         }
+
+    //       //  $.get('/endpoint', function(data) {
+    //        // do something with the data
+    //        function deductFare(amount) {
+    //       // Check if the user has enough balance
+    //         if (balance >= amount) {
+    //            balance -= amount;
+    //          alert(`$${amount} deducted from your account. Your new balance is $${balance}.`);
+    //         } else {
+    //           alert("You don't have enough balance to make this transaction.");
+    //          }
+    //       }
+    //   //  });
+    @auth
+    var balance= 500;
+    var deductiionAmount = 20;
+    @endauth
     
-@endsection
+    @guest
+    var balance = 0;
+    var deductionAmount = 20;
+    @endguest
+      
+    function confirmDeduction(Balance, deductionAmount) {
+    
+  // Prompt the user to confirm the deduction
+
+  var confirmed = confirm(`Are you sure you want to deduct ${deductionAmount} from your balance?`);
+
+  // If the user confirmed, deduct the amount from the balance
+  if (confirmed) {
+    // Make sure the deduction amount is a positive number
+    if (deductionAmount > 0) {
+      // Make sure the balance is greater than or equal to the deduction amount
+      if (balance >= deductionAmount) {
+        balance -= deductionAmount;
+        alert(`Deducted ${deductionAmount} from your balance. Your new balance is ${balance}.`);
+      } else {
+        alert(`Your balance (${balance}) is less than the deduction amount (${deductionAmount}). Deduction failed.`);
+      }
+    } else {
+      alert(`Deduction amount must be a positive number.`);
+    }
+  } else {
+    alert(`Deduction cancelled.`);
+  }
+
+  return balance;
+    }
+  </script>
+    
+</body>
+</html>
+

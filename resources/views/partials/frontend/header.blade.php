@@ -16,10 +16,16 @@
     <header>
         <nav>
             <ul class="nav navbar justify-content-end">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Account balance</a>
-                  <div class="dropdown-menu">
+                  <li class="nav-item">
+                  <a class="nav-link" href="{{Route('history')}}"> History </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{Route('logout')}}">Log Out</a>
+                  </li>
 
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Balance</a>
+                  <div class="dropdown-menu">
                     <a class="dropdown-item" href="#">Mpesa</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">E-Wallet</a>
@@ -41,6 +47,5 @@
                   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
               </nav> -->
-
         </nav>
     </header>

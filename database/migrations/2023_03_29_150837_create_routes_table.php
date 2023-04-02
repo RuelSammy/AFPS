@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->id("route_id");
-            // $table->timestamps();
+            $table-> string('psv_name');
+            $table->timestamps();
         });
     }
 

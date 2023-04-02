@@ -11,9 +11,17 @@ class PagesController extends Controller
         return view('pages.index');
     }
 
-    public function accounts()
+    public function history()
     {
         return view('pages.history');
+    }
+
+    public function landing(){
+        
+        return view('pages.landingpage');
+    }
+    public function route(){
+        return view ('pages.admin');
     }
 
 }
