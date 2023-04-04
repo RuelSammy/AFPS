@@ -12,9 +12,17 @@ class RoutesController extends Controller
         
         $n_route= new Route();
         $n_route->route_id = $request-> route_id; 
-        $n_route ->psv_name= $request-> psv_name;
+        $n_route ->route_name= $request-> route_name;
         $n_route-> save();   
 
         return redirect('/home');
+    }
+
+    public function showRoute(){
+        $id=request()->Route()->id;
+        $get_id=Route::find($id);
+        $route_id=$get_id->id;
+
+        return view('pages.index', compact('route_id'));
     }
 }

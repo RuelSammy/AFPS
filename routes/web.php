@@ -33,7 +33,8 @@ Route::get('/logout', [LogoutController::class,'logout'])->name('logout');
 Route::get('/history', [App\Http\Controllers\PagesController::class,'history'])->name('history');
 Route::get('', [PagesController::class, 'landing']) -> name('landing');
 Route::get('/routes', [PagesController::class, 'route'])-> name('routes');
-
+Route::get('/accounts', [PagesController::class , 'account']) -> name('accounts');
+Route::get('/balances', [AccountsController::class, 'showBalance'])->name('balance');
 // Route::get('/logout', [\App\Http\Controllers\LogoutController::class,
 // // function(){
 // //     return redirect('/landing');
@@ -43,3 +44,4 @@ Route::get('/routes', [PagesController::class, 'route'])-> name('routes');
 //Resource Posts
 Route::post('/accounts', [AccountsController::class, 'store']);
 Route::post('/routes', [RoutesController::class,'store'] );
+// Route::post('/admin',[AdminsController::class,'store']);

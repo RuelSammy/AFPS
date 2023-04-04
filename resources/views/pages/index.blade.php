@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +23,13 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{{Route('logout')}}">Log Out</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{Route('routes')}}">Routes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{Route('accounts')}}">Admin</a>
+                  </li>
+
                   @endauth
 
                 <li class="nav-item dropdown">
@@ -55,9 +61,9 @@
 
       <select name="route" id="route">
         <optgroup label="Embassava">
-          <option  value="town-jogoo">Town - Jogoo rd (30 sh)</option>
-          <option  value="jogoo-buruburu">Jogoo rd - Buruburu (20 sh)</option>
-          <option  value="town-buruburu">Town - Buruburu (50 sh)</option>
+          <option      data-id="30"   onclick="handleonclick(event)" value="town-jogoo">Town - Jogoo rd (30 sh)</option>
+          <option      data-id="20"   onclick="handleonclick(event)" value="jogoo-buruburu">Jogoo rd - Buruburu (20 sh)</option>
+          <option      data-id="50"   onclick="handleonclick(event)"value="town-buruburu">Town - Buruburu (50 sh)</option>
         </optgroup>
        <!-- <form method="POST" action="/accounts">
        @csrf
@@ -65,18 +71,6 @@
           <input type="text" name="balance">
           <button type="submit">Submit</button>
     </form> -->
-
-
-
-
-
-
-
-
-
-
-
-
         <!-- <optgroup label="Umoinner">
           <option value="town-kawangware">Town - Kawangware (40 sh)</option>
           <option value="westlands-kawangware">Westlands - Kawangware (30 sh)</option>
@@ -93,8 +87,17 @@
           <option value="town-syokimau">Town - Syokimau (70 sh)</option>
         </optgroup> -->
       <!-- </select> -->
-      <input onclick="confirmDeduction(1000, 20)" type="submit" name="submit" value="Select Route">
+      <input onclick="confirmDeduction()" type="submit" name="submit" value="Select Route">
+    <p> Your balance is {{$balance}} </p>
+    
     </form>
+
+    <!-- <form method="POST" action="{{ route('accounts') }}">
+        @csrf
+        <label for="num_customers">Number of Customers:</label>
+        <input type="number" id="dependents" name="num_customers" required>
+        <button type="submit">Pay Fare</button>
+     </form> -->
 
     <script> 
     // function showConfirmation() {
@@ -127,22 +130,30 @@
     //          }
     //       }
     //   //  });
-    @auth
-    var balance= 500;
-    var deductiionAmount = 20;
+
+
+
+   @auth
+    var balance =<?php echo json_encode($balance) ?>
+    
+    var deductionAmount = deductionAmount;
     @endauth
     
     @guest
     var balance = 0;
-    var deductionAmount = 20;
-    @endguest
-      
-    function confirmDeduction(Balance, deductionAmount) {
     
+    @endguest
+    
+    function handleButtonClick(event) {
+    // Get the id and code from the data attributes of the button
+    var id = event.target.dataset.id;    
+    // Do something with the id 
+    var deductionAmount = id;
+  }
+      
+  function confirmDeduction(Balance, deductionAmount) {
   // Prompt the user to confirm the deduction
-
   var confirmed = confirm(`Are you sure you want to deduct ${deductionAmount} from your balance?`);
-
   // If the user confirmed, deduct the amount from the balance
   if (confirmed) {
     // Make sure the deduction amount is a positive number
@@ -151,18 +162,19 @@
       if (balance >= deductionAmount) {
         balance -= deductionAmount;
         alert(`Deducted ${deductionAmount} from your balance. Your new balance is ${balance}.`);
-      } else {
+         } else {
         alert(`Your balance (${balance}) is less than the deduction amount (${deductionAmount}). Deduction failed.`);
-      }
-    } else {
+         }
+         } else {
       alert(`Deduction amount must be a positive number.`);
-    }
-  } else {
+      }
+      } else {
     alert(`Deduction cancelled.`);
-  }
-
+     }
   return balance;
     }
+
+    
   </script>
     
 </body>
