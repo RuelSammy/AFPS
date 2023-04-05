@@ -44,4 +44,8 @@ class PagesController extends Controller
         return view('pages.balance');
     }
 
+    public function logout(){
+        return view('pages.user');
+    }
+
 }

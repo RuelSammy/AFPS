@@ -71,7 +71,7 @@
           <input type="text" name="balance">
           <button type="submit">Submit</button>
     </form> -->
-        <!-- <optgroup label="Umoinner">
+       {{-- <optgroup label="Umoinner">
           <option value="town-kawangware">Town - Kawangware (40 sh)</option>
           <option value="westlands-kawangware">Westlands - Kawangware (30 sh)</option>
           <option value="town-kabiria">Town - Kabiria (50 sh)</option>
@@ -85,10 +85,11 @@
           <option value="town-rongai">Town - Rongai (50 sh)</option>
           <option value="town-madaraka">Town - Madaraka (30 sh)</option>
           <option value="town-syokimau">Town - Syokimau (70 sh)</option>
-        </optgroup> -->
-      <!-- </select> -->
-      <input onclick="confirmDeduction()" type="submit" name="submit" value="Select Route">
-    <p> Your balance is {{$balance}} </p>
+        </optgroup>
+      </select>  --}}
+       balance = {{$balance}}
+       
+      <input onclick="confirmDeduction(balance, 20)" type="submit" name="submit" value="Select Route">
     
     </form>
 
@@ -134,9 +135,9 @@
 
 
    @auth
-    var balance =<?php echo json_encode($balance) ?>
+    var balance= <?php echo json_encode($balance) ?>
     
-    var deductionAmount = deductionAmount;
+    var deductionAmount = 20;
     @endauth
     
     @guest
@@ -151,7 +152,7 @@
     var deductionAmount = id;
   }
       
-  function confirmDeduction(Balance, deductionAmount) {
+  function confirmDeduction(balance, deductionAmount) {
   // Prompt the user to confirm the deduction
   var confirmed = confirm(`Are you sure you want to deduct ${deductionAmount} from your balance?`);
   // If the user confirmed, deduct the amount from the balance

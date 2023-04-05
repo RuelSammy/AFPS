@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountsController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\RoutesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,10 @@ Route::get('', [PagesController::class, 'landing']) -> name('landing');
 Route::get('/routes', [PagesController::class, 'route'])-> name('routes');
 Route::get('/accounts', [PagesController::class , 'account']) -> name('accounts');
 Route::get('/balances', [AccountsController::class, 'showBalance'])->name('balance');
+Route::get('/logout', [PagesController::class, 'logout' ])->name('logout');
+
+Route::post('logout',[UserController::class, 'logout'])->name('logout');
+
 // Route::get('/logout', [\App\Http\Controllers\LogoutController::class,
 // // function(){
 // //     return redirect('/landing');

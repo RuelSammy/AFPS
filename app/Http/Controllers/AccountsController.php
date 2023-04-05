@@ -26,7 +26,6 @@ class AccountsController extends Controller
         $validateData = $request->validate([
             'balance' => 'required|numeric'
         ]);
-
         $n_account = new Account();
         $n_account->id = request()->user()->id;
         $n_account->balance = $validateData['balance'];
@@ -49,7 +48,7 @@ class AccountsController extends Controller
             return view('pages.balance', compact('balance'));
         } else {
             // Handle the case where $account is null
-            $balance=10.0;
+            $balance=0.0;
             return view('pages.balance', compact('balance'));
         }
     }

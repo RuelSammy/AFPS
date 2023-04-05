@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('psv', function (Blueprint $table) {
-            $table->id("psv_id");
+            $table->id("id");
             $table->string("cost");
             $table->timestamps();
         });

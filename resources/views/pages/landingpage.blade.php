@@ -1,5 +1,3 @@
-@extends('layouts.landing')
-@section('content')
 <!DOCTYPE html>
 <html>
   <head>
@@ -44,11 +42,7 @@
   <body>
     <header>
            <nav>
-            <ul class="nav navbar justify-content-end">
-                  <li class="nav-item">
-                  <a class="nav-link" href="{{Route('login')}}"> Login </a>
-                  </li>
-            </ul>
+            
            </nav>
       <h1>Fare Processing System</h1>
     </header>
@@ -60,8 +54,14 @@
       @endauth
       @guest
     <a href="{{Route('login')}}" class="btn"> Get Started </a>
-      @endguest
+      @endguest 
+    
+      <div>
+        <div>
+         <a class="btn justify-content-end" href="{{Route('login')}}"> Login </a> 
+          <a class="btn justify-content-end" href="{{Route('register')}}"> Register </a> 
+        </div>
+      </div>
     </main>
   </body>
 </html>
-@endsection

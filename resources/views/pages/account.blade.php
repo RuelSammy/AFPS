@@ -63,6 +63,7 @@
 
 <div class="payment-form">
   <h2>Payment Details</h2>
+  
   <form action='/accounts' method="POST">
     @csrf
     <div class="form-group">
